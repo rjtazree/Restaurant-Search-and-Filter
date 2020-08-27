@@ -3,9 +3,7 @@
 <body>
 
 <?php
-
 $conn = mysqli_connect("localhost","root","","crud") or die("connection failed");
-
 $sql = "SELECT * FROM school";
 $result = mysqli_query($conn,$sql) or die("query unsuccessful");
 ?>
@@ -16,9 +14,11 @@ $result = mysqli_query($conn,$sql) or die("query unsuccessful");
     <th>Class</th>
 
 
+<?php if(mysqli_num_rows($result)>0){
+?>
+
 <?php
-    while($row = mysqli_fetch_assoc($result))
-    {
+    while($row = mysqli_fetch_assoc($result)){
 ?>
    
         <tr>
@@ -29,8 +29,17 @@ $result = mysqli_query($conn,$sql) or die("query unsuccessful");
        
 
 <?php
-    }
+    } //while loop ends here
 ?>
+
+
+<?php
+    } //if ends here
+else
+    echo "no record found";
+    mysqli_close($conn);
+?>
+
 </table>
 </body>
 </html>
